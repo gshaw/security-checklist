@@ -2,6 +2,13 @@
 
 Adapted from [SecurityChecklist.org](https://securitychecklist.org) | [Hacker News Discussion](https://news.ycombinator.com/item?id=11323849)
 
+### Instructions
+
+* Create a Github Gist from the README for the project you are auditing to enable the clicking checkboxes as you perform each operation.
+* When creating the Gist replace example.com with the domain you are auditing.
+
+### Checklist
+
 - [ ] Is the website only served over https?
 
 ```sh
