@@ -1,6 +1,6 @@
 # Security Checklist
 
-[SecurityChecklist.org](https://securitychecklist.org) | [Hacker News Discussion](https://news.ycombinator.com/item?id=11323849)
+Adapted from [SecurityChecklist.org](https://securitychecklist.org) | [Hacker News Discussion](https://news.ycombinator.com/item?id=11323849)
 
 - [ ] Is the website only served over https?
 
