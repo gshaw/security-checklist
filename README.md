@@ -92,7 +92,7 @@ X-Content-Type-Options: nosniff
 >
 ```
 
-- [ ] Are password entropy checks done during user sign-up, using, say AUTH_PASSWORD_VALIDATORS?
+- [ ] Are password checks done during user sign-up, to ensure minimum length passwords of at least 8 characters.  Consider checking password entropy using [strong_password](https://github.com/bdmac/strong_password)?
 
 - [ ] Are you storing only the hash of your users password, and not the cleartext password, using (say) [BCrypt](https://codahale.com/how-to-safely-store-a-password/)?
 
@@ -118,21 +118,27 @@ $ curl -s -I example.com/url_that_sets_cookie | grep '^Set-Cookie'
 Set-Cookie: ****;Path=/;Expires=Fri, 16-Mar-2018 19:18:51 GMT;Secure;HttpOnly;Priority=HIGH
 ```
 
-- [ ] Do forms set a cross-site request forgery cookie?
+- [ ] Do forms prevent cross-site request forgery using a hidden field?
 
 ```sh
-$ curl -s -I https://example.com/url_with_form | grep '^Set-Cookie'
-Set-Cookie: csrftoken=*****************; expires=Thu, 16-Mar-2017 01:26:03 GMT;Secure;HttpOnly; Max-Age=31449600; Path=/
+$ curl -s https://example.com/url_with_form | grep csrf
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="+Y18jUBDT3eaxb+qrAk/TebfzybOyxShFwspkdgVw2eym0LE8b6TCJ8l6kXSUv5Mv772VpnvQ7G0VSigK4Ez1w==" />
+
+$ curl -s https://example.com/url_with_form | grep hidden | grep authenticity_token
+<input type="hidden" name="authenticity_token" value="8FKbxvZoUIc1lUUK5BFpxvX15ZjETB5z2zuevU+4+TOQvg3kdLG+5RU0O4LeNL0rM4hultbMXAIA0UXtAadxLA==" />
 ```
 
 - [ ] Are all user uploads validated for expected content type?
 
 - [ ] Are the permissions of all uploaded files readonly?
 
-- [ ] Are all form fields (with the exception of password fields) validated with a restrictive regex?
+- [ ] Are all form fields validated, either with regex where applicable or at a least to prevent excessively large input?
 
-- [ ] Are there unit tests (say, using [Selenium](http://www.seleniumhq.org)) which show that one authenticated user cannot access another user's content?
+Example, name fields must be less than 250 characters to prevent pasting a novel into the field.
+
+- [ ] Are there unit tests (say, using [Capybara](https://github.com/jnicklas/capybara)) which show that one authenticated user cannot access another user's content?
 
 - [ ] Have you made sure that database passwords, server signing keys, and hash salts are not checked into source control?
 
-- [ ] Do you have an account recovery flow? Be aware that this can jeopardize everything on this checklist.
+- [ ] Have you reviewed your account recovery flow to ensure this doesn't invalidate everything completed on this checklist?
