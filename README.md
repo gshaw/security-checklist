@@ -18,11 +18,11 @@ $ curl -s -I https://example.org | grep '^Strict'
 Strict-Transport-Security: max-age=63072000; includeSubdomains; always
 ```
 
-- [ ] Is the server certificate at least 4096 bits?
+- [ ] Is the server certificate at least 2048 bits?
 
 ```sh
 $ openssl s_client -showcerts -connect example.org:443 |& grep '^Server public key'
-Server public key is 4096 bit
+Server public key is 2048 bit
 ```
 
 - [ ] Is TLS1.2 the only supported protocol?
